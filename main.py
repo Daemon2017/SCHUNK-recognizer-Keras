@@ -6,6 +6,7 @@ from keras.layers import Conv2D, MaxPooling2D
 from keras.optimizers import Adadelta
 from keras import backend as K
 from keras.callbacks import TensorBoard
+from keras.models import load_model
 
 K.set_image_dim_ordering('tf')
 
@@ -76,6 +77,7 @@ def train():
               epochs=25,
               callbacks=[tbCallBack],
               validation_data=(x_test, y_test))
+    model.save('model.h5')
 
 
 def predict():
@@ -91,6 +93,15 @@ def predict():
         print 'Max=%2f Pos=%3d' % (max, pos)
 
 
-model = build()
-train()
-predict()
+fst_choice = raw_input('Please, enter needed action (load or train): ')
+if fst_choice == 'load':
+    model = load_model('model.h5')
+elif fst_choice == 'train':
+    model = build()
+    train()
+
+scnd_choice = raw_input('Model is ready! Start prediction? (y or n): ')
+if scnd_choice == 'y':
+    predict()
+elif scnd_choice == 'n':
+    exit()
