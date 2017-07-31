@@ -1,12 +1,10 @@
 import numpy as np
 
-from keras.models import Sequential
-from keras.layers import Dense, Flatten
-from keras.layers import Conv2D, MaxPooling2D
+from keras.models import Sequential, load_model
+from keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
 from keras.optimizers import Adadelta
-from keras import backend as K
 from keras.callbacks import TensorBoard
-from keras.models import load_model
+from keras import backend as K
 
 K.set_image_dim_ordering('tf')
 
